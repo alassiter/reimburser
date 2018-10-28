@@ -14,6 +14,8 @@ class Project
     raise StandardError if CITY_VALUES.exclude?(@city_value)
   end
 
-
+  def reimbursement
+    90
+  end
 
 end

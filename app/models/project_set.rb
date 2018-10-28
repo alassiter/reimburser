@@ -1,0 +1,2 @@
+class ProjectSet < ApplicationRecord
+end

@@ -5,6 +5,7 @@ RSpec.describe Project, type: :model do
     it { is_expected.to respond_to(:city_value) }
     it { is_expected.to respond_to(:starts_at) }
     it { is_expected.to respond_to(:ends_at) }
+    it { is_expected.to respond_to(:reimbursement) }
   end
 
   describe 'reimbursements for projects with only two days' do
@@ -59,5 +60,9 @@ RSpec.describe Project, type: :model do
       let(:reimbursement) { (travel_day_high * 2) + full_day_high }
       it { expect(high_project.reimbursement).to eql(reimbursement) }
     end
+  end
+
+  describe 'project sets' do
+    
   end
 end

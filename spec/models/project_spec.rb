@@ -61,8 +61,4 @@ RSpec.describe Project, type: :model do
       it { expect(high_project.reimbursement).to eql(reimbursement) }
     end
   end
-
-  describe 'project sets' do
-    
-  end
 end

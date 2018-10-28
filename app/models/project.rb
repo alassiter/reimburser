@@ -15,7 +15,12 @@ class Project
   end
 
   def reimbursement
-    90
+    case city_value
+    when :low
+      45*2
+    when :high
+      55*2
+    end
   end
 
 end

@@ -19,12 +19,23 @@ class Project
   end
 
   def reimbursement
-    case city_value
-    when :low
-      45*2
-    when :high
-      55*2
-    end
+    send("#{city_value}_reimbursement")
   end
 
+  private
+  def low_reimbursement
+    
+  end
+
+  def high_reimbursement
+    
+  end
+
+  def travel_day_reimbursement(value)
+    
+  end
+
+  def full_day_reimbursement(value)
+    
+  end
 end

@@ -32,25 +32,31 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  # describe 'reimbursements for projects greater than two days' do
-  #   let(:low_project) { Project.new(
-  #       city_value: :low,
-  #       starts_at: DateTime.parse('2018-10-01'),
-  #       ends_at: DateTime.parse('2018-10-03')
-  #     ) }
+  describe 'reimbursements for projects greater than two days' do
+    let(:travel_day_low) { Project::RATES[:travel_day_low] }
+    let(:travel_day_high) { Project::RATES[:travel_day_high] }
+    let(:full_day_low) { Project::RATES[:full_day_low] }
+    let(:full_day_high) { Project::RATES[:full_day_high] }
 
-  #   let(:high_project) { Project.new(
-  #       city_value: :high,
-  #       starts_at: DateTime.parse('2018-10-01'),
-  #       ends_at: DateTime.parse('2018-10-03')
-  #     ) }
+    let(:low_project) { Project.new(
+        city_value: :low,
+        starts_at: DateTime.parse('2018-10-01'),
+        ends_at: DateTime.parse('2018-10-03')
+      ) }
 
-  #   context 'when in a low_value city' do
-  #     it { expect(low_project.reimbursement).to eql(45*2 + 75) }
-  #   end
+    let(:high_project) { Project.new(
+        city_value: :high,
+        starts_at: DateTime.parse('2018-10-01'),
+        ends_at: DateTime.parse('2018-10-03')
+      ) }
 
-  #   xcontext 'when in a high_value city' do
-  #     it { expect(high_project.reimbursement).to eql(55*2 + 85) }
-  #   end
-  # end
+    context 'when in a low_value city' do
+      let(:reimbursement) { (travel_day_low * 2) + full_day_low }
+      it { expect(low_project.reimbursement).to eql(reimbursement) }
+    end
+
+    xcontext 'when in a high_value city' do
+      it { expect(high_project.reimbursement).to eql(55*2 + 85) }
+    end
+  end
 end

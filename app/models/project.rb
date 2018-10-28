@@ -5,6 +5,12 @@ class Project
   attr_accessor :city_value, :starts_at, :ends_at
 
   CITY_VALUES = %i(high low)
+  RATES = {
+    travel_day_low: 45,
+    travel_day_high: 55,
+    full_day_low: 75,
+    full_day_high: 85
+  }
 
   def initialize(args)
     @city_value = args[:city_value]

@@ -55,8 +55,9 @@ RSpec.describe Project, type: :model do
       it { expect(low_project.reimbursement).to eql(reimbursement) }
     end
 
-    xcontext 'when in a high_value city' do
-      it { expect(high_project.reimbursement).to eql(55*2 + 85) }
+    context 'when in a high_value city' do
+      let(:reimbursement) { (travel_day_high * 2) + full_day_high }
+      it { expect(high_project.reimbursement).to eql(reimbursement) }
     end
   end
 end

@@ -12,12 +12,10 @@ class Project
     full_day_high: 85
   }
 
-  def initialize(args)
+  def initialize(args = {})
     @city_value = args[:city_value]
     @starts_at = args[:starts_at]
     @ends_at = args[:ends_at]
-
-    raise StandardError if CITY_VALUES.exclude?(@city_value)
   end
 
   def reimbursement

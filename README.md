@@ -1,24 +1,3 @@
-# README
+# NOTES
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- I started with a Rails project, then decided I didn't need a database to accomplish this task. I remove unneeded Rails libs, but left in some configuration files. #TODO: Remove unneeded config files

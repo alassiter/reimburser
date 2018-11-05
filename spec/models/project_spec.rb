@@ -8,6 +8,17 @@ RSpec.describe Project, type: :model do
     it { is_expected.to respond_to(:reimbursement) }
   end
 
+  describe 'build_days' do
+    let(:day_array) { [DateTime.parse('2018-01-01'), DateTime.parse('2018-01-02'), DateTime.parse('2018-01-03')] }
+    let(:project) { Project.new(
+        city_value: :low,
+        starts_at: DateTime.parse('2018-01-01'),
+        ends_at: DateTime.parse('2018-01-03')
+      ) }
+
+    it { expect(project.build_days).to eq(day_array) }
+  end
+
   describe 'reimbursements for projects with only two days' do
     let(:travel_day_low) { Project::RATES[:travel_day_low] }
     let(:travel_day_high) { Project::RATES[:travel_day_high] }

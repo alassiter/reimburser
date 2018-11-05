@@ -5,7 +5,7 @@ class Project
   attr_accessor :city_value, :starts_at, :ends_at
 
   CITY_VALUES = %i(high low)
-  
+
   RATES = {
     travel_day_low: 45,
     travel_day_high: 55,
@@ -19,25 +19,35 @@ class Project
     @ends_at = args[:ends_at]
   end
 
-  def reimbursement
-    travel_day_reimbursement(city_value) +
-    full_day_reimbursement(city_value)
+  def reimbursement(travel_day_qty: 2, full_day_qty: nil)
+    travel_day_reimbursement(city_value, travel_day_qty) +
+    full_day_reimbursement(city_value, full_day_qty)
+  end
+
+  def build_days
+    (starts_at..ends_at).to_a
+  end
+
+  def calculate_total_days
+    (starts_at..ends_at).uniq.count
+  end
+
+  def calculate_full_day_qty
+    days = (starts_at..ends_at).count
+    return 0 if days <= 2
+
+    days - 2
   end
 
   private
-  def travel_day_reimbursement(value)
+  def travel_day_reimbursement(value, travel_day_qty)
     # This exercise assumes always a start and end date
-    2 * RATES["travel_day_#{value}".to_sym]
+    travel_day_qty * RATES["travel_day_#{value}".to_sym]
   end
 
-  def full_day_reimbursement(value)
-    full_day_qty * RATES["full_day_#{value}".to_sym]
+  def full_day_reimbursement(value, full_day_qty)
+    (full_day_qty || calculate_full_day_qty) * RATES["full_day_#{value}".to_sym]
   end
 
-  def full_day_qty
-    days = (starts_at..ends_at).count
-    return 0 if days <= 2
-    
-    days - 2
-  end
+
 end

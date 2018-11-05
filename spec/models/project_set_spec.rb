@@ -9,6 +9,20 @@ RSpec.describe ProjectSet, type: :model do
     it { expect(project_set.projects.count).to eq(2) }
   end
 
+  describe 'calculate_full_days' do
+    # given a set of projects
+    # return how many full days we get
+    let(:project_1) { Project.new(
+        city_value: :low,
+        starts_at: DateTime.parse('2015-09-01'),
+        ends_at: DateTime.parse('2015-09-03')
+      ) }
+
+    let(:set) { [project_1] }
+
+    it { expect(set.calculate_full_days).to eql(1) }
+  end
+
   describe 'Set 1' do
     let(:project_1) { Project.new(
         city_value: :low,
@@ -47,7 +61,7 @@ RSpec.describe ProjectSet, type: :model do
 
     let(:set_2) { ProjectSet.new(project_1, project_2, project_3) }
 
-    it 'calculates reimbursement' do
+    xcontext 'when calculating reimbursement' do
       let(:reimbursement) { travel_day_low }
     end
   end

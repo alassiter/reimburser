@@ -9,18 +9,28 @@ RSpec.describe ProjectSet, type: :model do
     it { expect(project_set.projects.count).to eq(2) }
   end
 
-  describe 'calculate_full_days' do
+  describe 'build_date_list' do
     # given a set of projects
-    # return how many full days we get
+    # days should be a hash of dates with their value
     let(:project_1) { Project.new(
         city_value: :low,
         starts_at: DateTime.parse('2015-09-01'),
         ends_at: DateTime.parse('2015-09-03')
       ) }
 
-    let(:set) { [project_1] }
+    let(:project_2) { Project.new(
+        city_value: :low,
+        starts_at: DateTime.parse('2015-09-03'),
+        ends_at: DateTime.parse('2015-09-05')
+      ) }
 
-    it { expect(set.calculate_full_days).to eql(1) }
+    let(:set) { ProjectSet.new(project_1, project_2) }
+
+    it 'builds the right structure' do
+      expect(set.build_date_list).to be_a(Hash)
+      expect(set.build_date_list.keys.first).to eql(project_1.starts_at)
+      expect(set.build_date_list.keys.last).to eql(project_2.ends_at)
+    end
   end
 
   describe 'Set 1' do

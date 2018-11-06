@@ -4,7 +4,7 @@
 class Project
   attr_accessor :city_value, :starts_at, :ends_at
 
-  CITY_VALUES = %i(high low)
+  CITY_VALUES = { low: 0, high: 1 }
 
   RATES = {
     travel_day_low: 45,
@@ -20,8 +20,8 @@ class Project
   end
 
   def reimbursement(travel_day_qty: 2, full_day_qty: nil)
-    travel_day_reimbursement(city_value, travel_day_qty) +
-    full_day_reimbursement(city_value, full_day_qty)
+    travel_day_reimbursement(travel_day_qty) +
+    full_day_reimbursement(full_day_qty)
   end
 
   def build_days
@@ -40,13 +40,13 @@ class Project
   end
 
   private
-  def travel_day_reimbursement(value, travel_day_qty)
+  def travel_day_reimbursement(travel_day_qty)
     # This exercise assumes always a start and end date
-    travel_day_qty * RATES["travel_day_#{value}".to_sym]
+    travel_day_qty * RATES["travel_day_#{CITY_VALUES[city_value]}".to_sym]
   end
 
-  def full_day_reimbursement(value, full_day_qty)
-    (full_day_qty || calculate_full_day_qty) * RATES["full_day_#{value}".to_sym]
+  def full_day_reimbursement(full_day_qty)
+    (full_day_qty || calculate_full_day_qty) * RATES["full_day_#{CITY_VALUES[city_value]}".to_sym]
   end
 
 

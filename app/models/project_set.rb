@@ -1,8 +1,9 @@
 class ProjectSet
-  attr_accessor :projects, :days_data
+  attr_accessor :projects, :date_list, :days_data
 
   def initialize(*projects)
     @projects = build_projects(projects)
+    @date_list = {}
     @days_data = {
       travel_day_low: { count: 0, dates: [] },
       travel_day_high: { count: 0, dates: [] },
@@ -14,8 +15,20 @@ class ProjectSet
   def build_projects(projects)
     # { 1: <Project #>, 2: <Project #> }
     _projects = {}
-    projects.each_with_index(1) do |project, index|
+    projects.each.with_index(1) do |project, index|
       _projects[index] = project
+    end
+
+    _projects
+  end
+
+  def build_date_list
+    projects.each do |project|
+      _days_list = project.build_days
+
+      _days_list.each do |date|
+        add_date_to_date_list(date, project.city_value)
+      end
     end
   end
 
@@ -23,29 +36,21 @@ class ProjectSet
 
   end
 
-  def calculate_days
-    days_data[:travel_day_low] =
-
-    # {
-    #   travel_day_qty: 2,
-    #   full_day_qty: build_date_list.size - 2
-    # }
-  end
-
-  def build_date_list
-    projects.each do |project|
-
+  private
+  def add_date_to_date_list(date, value)
+    # check for day
+    # do something
+    if date_list.key?(date)
+      date_list[date] = Project::CITY_VALUES[value] > # START HERE, need to compare values, then set a value if higher
     end
-
-    projects.flat_map(&:build_days).sort
   end
 end
 
-# TODO: a set needs to take a collection of projects,
-# and have its own start and end dates
-
-[
-  { id: 1, kind: :travel, value: :low, date: DateTime.parse('2018-01-03') },
-  { id: 1, date: DateTime.parse('2018-01-01') },
-  { id: 1, date: DateTime.parse('2018-  01-02') }
-]
+# 1. take all projects
+# 2. explode date range into dates
+# 3. Classify each date as either high or low
+# 4. Pull out duplicate dates
+# 5. assign first and last date as travel
+# 6. assign all other dates as full days
+# 7. calculate each date reimbursement
+# 8. Total the individual days

@@ -1,8 +1,13 @@
 ### NOTES
 
-- This project was intended only to be used as an rspec test target.
-
+- Ruby 2.5.3
+- Rails 5.2.1
+- This project was intended only to be used as an rspec test target, so the only interface is from the command line
 - I started with a Rails project, then decided I didn't need a database to accomplish this task. I remove unneeded Rails libs, but left in some configuration files. #TODO: Remove unneeded config files
+
+
+### TO VERIFY PASSING CLIENT REQUESTED SPECIFICATIONS
+- Run all the rspec tests, the project_set_specs has the client spec tests
 
 ### JOURNAL
 #### November 5, 2018

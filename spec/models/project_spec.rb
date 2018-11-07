@@ -9,7 +9,7 @@ RSpec.describe Project, type: :model do
   end
 
   describe 'build_days' do
-    let(:day_array) { [DateTime.parse('2018-01-01'), DateTime.parse('2018-01-02'), DateTime.parse('2018-01-03')] }
+    let(:day_array) { [DateTime.parse('2018-01-01').to_i,  DateTime.parse('2018-01-02').to_i, DateTime.parse('2018-01-03').to_i] }
     let(:project) { Project.new(
         city_value: :low,
         starts_at: DateTime.parse('2018-01-01'),

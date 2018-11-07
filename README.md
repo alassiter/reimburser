@@ -37,3 +37,4 @@
   + Given two numbers, finding gaps is not hard. 
   + The tricky thing, at this moment, is the algorithm to decide how to iterate
 - Aaaand my lesson for the day: merge != merge! ... I know better, yet it stung me. currently 3 of the client sets are passing. I expect the 4th to pass with no further code updates
+- indeed! it worked!

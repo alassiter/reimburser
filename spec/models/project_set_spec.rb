@@ -138,9 +138,9 @@ RSpec.describe ProjectSet, type: :model do
           ends_at: DateTime.parse('2015-09-08')
         ) }
 
-      let(:set_2) { ProjectSet.new(project_1, project_2, project_3) }
+      let(:set_3) { ProjectSet.new(project_1, project_2, project_3) }
 
-      it { expect(set_2.build_date_list.count).to eql(7) }
+      it { expect(set_3.build_date_list.count).to eql(7) }
 
       context 'when calculating reimbursement' do
         it 'calculates the correct reimbursement' do
@@ -149,9 +149,49 @@ RSpec.describe ProjectSet, type: :model do
                                     (1 * full_day_low)    +
                                     (2 * full_day_high)
 
-          expect(set_2.calculate_reimbursement).to eql(_expected_reimbursement)
+          expect(set_3.calculate_reimbursement).to eql(_expected_reimbursement)
         end
       end
     end # Set 3
+
+    describe 'Set 4' do
+      let(:project_1) { Project.new(
+          city_value: :low,
+          starts_at: DateTime.parse('2015-09-01'),
+          ends_at: DateTime.parse('2015-09-01')
+        ) }
+
+      let(:project_2) { Project.new(
+          city_value: :low,
+          starts_at: DateTime.parse('2015-09-01'),
+          ends_at: DateTime.parse('2015-09-01')
+        ) }
+
+      let(:project_3) { Project.new(
+          city_value: :high,
+          starts_at: DateTime.parse('2015-09-02'),
+          ends_at: DateTime.parse('2015-09-02')
+        ) }
+
+      let(:project_4) { Project.new(
+          city_value: :high,
+          starts_at: DateTime.parse('2015-09-02'),
+          ends_at: DateTime.parse('2015-09-03')
+        ) }
+
+      let(:set_4) { ProjectSet.new(project_1, project_2, project_3, project_4) }
+
+      it { expect(set_4.build_date_list.count).to eql(3) }
+
+      context 'when calculating reimbursement' do
+        it 'calculates the correct reimbursement' do
+          _expected_reimbursement = (1 * travel_day_low)  +
+                                    (1 * travel_day_high)  +
+                                    (1 * full_day_high)
+
+          expect(set_4.calculate_reimbursement).to eql(_expected_reimbursement)
+        end
+      end
+    end # Set 4
   end
 end

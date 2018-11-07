@@ -6,7 +6,7 @@
 
 ### JOURNAL
 #### November 5, 2018
-- I thought I wouls start a journal, though I'm wrapping up the assignment
+- I thought I would start a journal, though I'm 1/2 way through the assignment
 - A lot of what I have currently are different ideas fleshed out
 - I finally (as of now) decided that really, I just need to expand the dates, then calculate each reimbursement then add them together
 - I'm trying to decide how many objects to create

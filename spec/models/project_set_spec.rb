@@ -49,6 +49,22 @@ RSpec.describe ProjectSet, type: :model do
         expect(set.calculate_reimbursement).to eql(_expected_reimbursement)
       end
     end
+
+    describe 'build_date_key_arrays' do
+      let(:project_3) { Project.new(
+          city_value: :high,
+          starts_at: DateTime.parse('2015-09-07'),
+          ends_at: DateTime.parse('2015-09-09')
+        ) }
+
+      let(:set_2) { ProjectSet.new(project_1, project_2, project_3) }
+
+      it { expect(set_2.date_list.keys.count).to eql(8) }
+
+      it 'builds two arrays, one for travel day keys and one for full' do
+        expect(set_2.build_date_key_arrays(set_2.date_list.keys).flatten.size).to eql(8)
+      end
+    end
   end
 
   describe 'client specifications' do
